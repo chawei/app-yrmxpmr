@@ -1,0 +1,40 @@
+<% title "X5er" %>
+
+<div class="view_container">
+  <div class="view_row">
+    <label>Name:</label>
+    <span><%=h @x5er.name %></span>
+  </div>
+  <div class="view_row">
+    <label>Email:</label>
+    <span><%=h @x5er.email %></span>
+  </div>
+  <div class="view_row">
+    <label class="left">Photos</label>
+    <div class="wide_container left">
+      <%- for photo in @x5er.photos -%>
+      <%= image_tag photo.data.url(:thumb) %>
+      <%- end -%>
+    </div>
+  </div>
+  
+  <div class="view_row">
+    <label>Sub Text</label>
+    <span class="field_content"><%= @x5er.sub_text %></span>
+  </div>
+  <div class="view_row">
+    <label>Description</label>
+    <span class="field_content"><%= @x5er.description %></span>
+  </div>
+  <div class="view_row">
+    <label>Chinese Description</label>
+    <span class="field_content"><%= @x5er.chinese_description %></span>
+  </div>
+  
+  <div class="view_row">
+    <%= link_to "Edit", edit_admin_x5er_path(@x5er) %> |
+    <%= link_to "Destroy", [:admin, @x5er], :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "View All", admin_x5ers_path %>
+  </div>
+
+</div>

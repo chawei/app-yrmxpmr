@@ -1,0 +1,9 @@
+<% content_for :sidebar do -%>
+  <%- for x5er in @x5ers %>
+  <div class="sub_category">
+    <%= link_to x5er.name, x5er_path(x5er) %>
+  </div>
+  <%- end -%>
+<% end -%>
+
+<%= @x5ers_homepage.content %>

@@ -1,0 +1,33 @@
+<% title "Client - #{@client.name}" %>
+
+<div class="view_container">
+  
+  <div class="view_row">
+    <label>Login</label>
+    <span><%=h @client.login %></span>
+  </div>
+  <div class="view_row">
+    <label>Name</label>
+    <span><%=h @client.name %></span>
+  </div>
+  <div class="view_row">
+    <label>Email</label>
+    <span><%=h @client.email %></span>
+  </div>
+  
+  <div class="view_row">
+    <label>Private Projects</label>
+    <span class="field_content">
+      <% for project in @client.projects -%>
+      <div><%=h project.title %></div>
+      <% end -%>
+    </span>
+  </div>
+
+  <div class="view_row">
+    <%= link_to "Edit", edit_admin_client_path(@client) %> |
+    <%= link_to "Delete", [:admin, @client], :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "View All", admin_clients_path %>
+  </div>
+
+</div>

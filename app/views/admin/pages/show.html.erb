@@ -1,0 +1,20 @@
+<% title "Page" %>
+
+<div class="view_container">  
+  <div class="view_row">
+    <label>Name</label>
+    <span class="field_content"><%=h @page.name %></span>
+  </div>
+  
+  <div class="view_row">
+    <label>Content</label>
+    <span class="field_content"><%= @page.content %></span>
+  </div>
+  
+</div>
+
+<div class="view_row clear_fix">
+  <%= link_to "Edit", edit_admin_page_path(@page) %> |
+  <%= link_to "Delete", [:admin, @page], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_pages_path %>
+</div>

@@ -1,0 +1,21 @@
+<% content_for :sidebar do -%>
+  <%- for x5er in X5er.all %>
+    <div class="sub_category">
+      <% @x5er == x5er ? classes = "current" : classes = '' -%>
+      <%= link_to x5er.name, x5er_path(x5er), :class => classes %>
+      <% if @x5er == x5er -%>
+      <div class="projects">
+        <% for project in x5er.public_projects(current_client) %>
+        <div class="project"><%= link_to project.title, project_path(project), :rel => project_path(project) %></div>
+        <% end -%>
+      </div>
+      <% end -%>
+    </div>
+  <%- end -%>
+<% end -%>
+
+<% if @x5er.blank? -%>
+<div class="notice">No Details</div>
+<% else -%>
+<%= render_x5er_html(@x5er) %>
+<% end -%>

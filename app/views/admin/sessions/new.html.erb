@@ -1,0 +1,23 @@
+<% title "Log In" %>
+
+<div class="edit_form_container">
+  <% form_tag admin_session_path do -%>
+  <div class="form_row">
+    <%= label_tag 'login', "Username" %>
+    <%= text_field_tag 'login', @login %>
+  </div>
+
+  <div class="form_row">
+    <%= label_tag 'password' %>
+    <%= password_field_tag 'password', nil %>
+  </div>
+
+  <!-- Uncomment this if you want this functionality
+  <div class="form_row"><%= label_tag 'remember_me', 'Remember me' %>
+  <%= check_box_tag 'remember_me', '1', @remember_me %></div>
+  -->
+
+  <div class="form_row"><%= submit_tag 'Log in' %></div>
+  <% end -%>
+
+</div>

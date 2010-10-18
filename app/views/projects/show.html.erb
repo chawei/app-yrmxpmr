@@ -1,0 +1,16 @@
+<% content_for :sidebar do -%>
+  <%- @category = @project.root_parent_category -%>
+  <%- for sub in @category.public_children %>
+    <div class="sub_category">
+      <%= link_to sub.name, category_path(sub) %>
+      <div class="projects">
+        <% for project in sub.public_projects(current_client) %>
+        <%- @project.id == project.id ? classes = 'current' : classes = '' -%>
+        <div class="project"><%= link_to project.title, project_path(project), :class => classes, :rel => project_path(project) %></div>
+        <% end -%>
+      </div>
+    </div>
+  <%- end -%>
+<% end -%>
+
+<%= render_project_html(@project) %>

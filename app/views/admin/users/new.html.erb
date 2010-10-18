@@ -1,0 +1,34 @@
+<% title "New User" %>
+<% @user.password = @user.password_confirmation = nil %>
+
+<div class="edit_form_container">
+  <%= error_messages_for :user %>
+  <% form_for :user, :url => admin_users_path do |f| -%>
+  <div class="form_row">
+    <%= label_tag 'login' %>
+    <%= f.text_field :login %>
+  </div>
+
+  <div class="form_row">
+    <%= label_tag 'name' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form_row">
+    <%= label_tag 'email' %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="form_row">
+    <%= label_tag 'password' %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="form_row">
+    <%= label_tag 'password_confirmation', 'Confirm Password' %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="form_row"><%= submit_tag 'Create' %></div>
+  <% end -%>
+</div>

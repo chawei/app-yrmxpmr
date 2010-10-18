@@ -1,0 +1,26 @@
+<div class="edit_form_container">
+<div class="note">* indicates required fields</div>
+
+<% form_for [:admin, @category], :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <!--<%= f.hidden_field :parent_id %>-->
+  <div class="form_row">
+    <%= f.label :name, '* Name' %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="form_row">
+    <%= f.label :published, '* Public?' %>
+    <%= f.check_box :published %>
+  </div>
+
+  <div class="form_row">
+    <label for="parent_id">* Parent Category</label>
+    <%= f.select :parent_id, 
+        @category.other_available_categories.collect {|p| [ p.name, p.id ] },
+        { :include_blank => "Set as Root Category" } %>
+  </div>
+  
+  <div class="form_row"><%= f.submit "Submit" %></div>
+<%- end -%>
+</div>

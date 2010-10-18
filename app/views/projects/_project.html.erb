@@ -1,0 +1,46 @@
+<div class="project">
+  <div class="project_header">
+    <div class="left_bar">
+      <span class="title"><%= project.title %></span>
+      <%- if project.has_chinese_description? -%>
+      <span class="show_chinese"></span>
+      <%- end -%>
+    </div>
+    <div class="right_bar">
+      <% unless project.location.blank? -%>
+      <span class="location">Location: <%=h project.location %></span>
+      <% end -%>
+      <span class="date"><%=h project.project_date.strftime('%m/%d/%Y') %></span>
+    </div>
+  </div>
+
+  <div class="project_content">
+    <div class="project_images">
+      <% if project.video_file_url.blank? %>
+        <% for photo in project.photos -%>
+        <div class="project_image">
+          <%= image_tag photo.data.url(:display) %>
+        </div>
+        <% end -%>
+      <% else -%>
+        <%= player({:file => project.video_file_url, :image => project.project_image.url(:display) }, 
+                   {:width => 620, :height => 400, :player_id => "jw_player-#{project.id}", :id => "flash_player-#{project.id}", :wmode => "transparent"}) %>
+      <% end -%>
+    </div>
+    <div class="sub_text"><%= project.sub_text %></div>
+    <div class="description"><%= project.description %></div>
+    <div class="chinese_description"><%= project.chinese_description %></div>
+  </div>
+  
+  <div class="metadata">
+    <div class="tag_title">Tags:</div>
+    <% for category in project.categories -%>
+      <div class="tag"><%= link_to category.name, category_path(category) %></div>
+    <% end -%>
+    <% for x5er in project.x5ers -%>
+      <div class="tag"><%= link_to x5er.name, x5er_path(x5er) %></div>
+    <% end -%>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="clear_fix"></div>
+</div>

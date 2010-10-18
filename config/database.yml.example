@@ -1,0 +1,23 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  host: localhost
+  user: root
+  password:
+  database: x5er_development
+
+test:
+  adapter: mysql
+  encoding: utf8
+  host: localhost
+  user: root
+  password:
+  database: x5er_test
+
+# production:
+#   adapter: mysql
+#   encoding: utf8
+#   host: localhost
+#   user: root
+#   password:
+#   database: x5er_production

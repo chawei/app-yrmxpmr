@@ -1,0 +1,24 @@
+<div class="project">
+  <div class="project_content">
+    <div class="project_images">
+      <% for photo in x5er.photos -%>
+      <div class="project_image">
+        <%= image_tag photo.data.url(:display) %>
+      </div>
+      <% end -%>
+    </div>
+    <div class="sub_text"><%= x5er.sub_text %></div>
+    
+    <div class="project_header">
+      <div class="left_bar">
+        <span class="title"><%= x5er.title %></span>
+        <%- if x5er.has_chinese_description? -%>
+        <span class="show_chinese"></span>
+        <%- end -%>
+      </div>
+    </div>
+    
+    <div class="description"><%= x5er.description %></div>
+    <div class="chinese_description"><%= x5er.chinese_description %></div>
+  </div>
+</div>

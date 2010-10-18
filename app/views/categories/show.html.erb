@@ -1,0 +1,26 @@
+<% content_for :sidebar do -%>
+  <%- for sub in @category.root.public_children %>
+    <div class="sub_category">
+      <% @category == sub ? classes = "current" : classes = '' -%>
+      <%= link_to sub.name, category_path(sub), :class => classes %>
+      <div class="projects">
+        <% for project in sub.public_projects(current_client) %>
+        <div class="project"><%= link_to project.title, project_path(project), :rel => project_path(project) %></div>
+        <% end -%>
+      </div>
+    </div>
+  <%- end -%>
+<% end -%>
+
+<% if @category.public_projects(current_client).blank? -%>
+  <div class="notice">No Available Projects</div>
+<% else -%>
+  <%- public_projects = @category.public_projects(current_client).paginate(:page => params[:page], 
+                                                                           :per_page => 10) -%>
+  <%- for project in public_projects -%>
+    <%= render_project_html(project) %>
+  <%- end -%>
+  <%= will_paginate(public_projects) %>
+
+<%- end -%>
+

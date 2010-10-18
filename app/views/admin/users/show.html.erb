@@ -1,0 +1,24 @@
+<% title "User" %>
+
+<div class="view_container">
+  
+  <div class="view_row">
+    <label>Login</label>
+    <span><%=h @user.login %></span>
+  </div>
+  <div class="view_row">
+    <label>Name</label>
+    <span><%=h @user.name %></span>
+  </div>
+  <div class="view_row">
+    <label>Email</label>
+    <span><%=h @user.email %></span>
+  </div>
+
+  <div class="view_row">
+    <%= link_to "Edit", edit_admin_user_path(@user) %> |
+    <%= link_to "Destroy", [:admin, @user], :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "View All", admin_users_path %>
+  </div>
+
+</div>

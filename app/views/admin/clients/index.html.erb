@@ -1,0 +1,26 @@
+<% title "Clients" %>
+
+<%- if @clients.blank? -%>
+<div class="vmargin_btm_m">Please add a new client</div>
+<%- else -%>
+<table class="view_all">
+  <tr>
+    <th>Login name</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% for client in @clients %>
+    <tr>
+      <td><%=h client.login %></td>
+      <td><%=h client.name %></td>
+      <td><%=h client.email %></td>
+      <td class='actions'><%= link_to "View details", [:admin, client] %> | 
+          <%= link_to "Edit", edit_admin_client_path(client) %> |
+          <%= link_to "Delete", [:admin, client], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%- end -%>
+
+<p><%= link_to "Add a new client", new_admin_client_path %></p>

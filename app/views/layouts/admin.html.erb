@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title><%= h(yield(:title) || "x5er Admin") %></title>
+    <%= stylesheet_link_tag 'base' %>
+    <%= stylesheet_link_tag 'admin' %>
+    
+    <%= javascript_include_tag 'admin' %>
+    <%= javascript_include_tag 'jquery' %>
+    <%= javascript_include_tag 'jrails' %>
+    <%= javascript_include_tag 'jquery-ui' %>
+    <%= javascript_include_tag 'swfobject' %>
+    <!--[if IE]>
+  	<link rel="stylesheet" href="/stylesheets/admin_ie.css" type="text/css" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+  	<link rel="stylesheet" href="/stylesheets/admin_ie6.css" type="text/css" />
+    <![endif]-->
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header_wrap">
+        <div id="header">
+          <div id="logo">Admin Panel</div>
+          <%- if logged_in? -%>
+          <div id="login_box">
+            <div id="actions">
+              <div class="action_1">
+                <%= link_to 'Logout', logout_url %>
+              </div>
+            </div>
+            <div id="greeting">
+              Hello <span id="name"><%= current_user.login %></span>
+            </div>
+          </div> <!-- END login_box -->
+          <%- end -%>
+        </div> <!-- END header -->
+      </div>
+
+      <div id="navigation_wrap" class="clear">
+        <div id="navigation">
+          <ul id="menu">
+            <li class="nav">
+              <%= link_to 'Home', admin_home_path, :class => 'root_item' %>
+            </li>
+            <li class="nav">
+              <%= link_to 'Categories', admin_categories_path, :class => 'root_item' %>      
+            </li>
+            <li class="nav">
+              <%= link_to 'Projects', admin_projects_path, :class => 'root_item' %>      
+            </li>
+            <!--
+            <li class="nav">
+                          <%= link_to 'X5ers', admin_x5ers_path, :class => 'root_item' %>      
+                        </li>-->
+            <li class="nav">
+              <%= link_to 'Pages', admin_pages_path, :class => 'root_item' %>      
+            </li>
+						<!--
+            <li class="nav">
+              <%= link_to 'Clients', admin_clients_path, :class => 'root_item' %>      
+            </li>-->
+            <li class="nav last">
+              <%= link_to 'Users', admin_users_path, :class => 'root_item' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="main_wrap">
+        <div id="main">
+          <div id="main_view">
+            <%- flash.each do |name, msg| -%>
+              <%= content_tag :div, msg, :id => "flash_#{name}" %>
+            <%- end -%>
+
+            <%- if show_title? -%>
+              <div id="headtitle"><%=h yield(:title) %></div>
+            <%- end -%>
+
+            <%= yield %>
+          </div>
+        </div> <!-- END main -->
+      </div>
+
+      <div id="footer_wrap">
+        <div id="footer">
+
+        </div> <!-- END footer -->
+      </div>
+    </div>
+  </body>
+</html>

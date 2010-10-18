@@ -1,0 +1,26 @@
+.index_item .handle {
+  float: left;
+  margin-right: 10px;
+}
+
+.index_item .thumbnail {
+  float: left;
+  margin-right: 10px;
+}
+
+.index_item .title {
+  float: left;
+}
+
+.index_item .name {
+  float: left;
+}
+
+.index_item .actions {
+  float: right;
+}
+
+
+.view_container .rich_text ol {
+  margin-left: 23px;
+}

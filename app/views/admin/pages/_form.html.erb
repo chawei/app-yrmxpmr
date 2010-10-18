@@ -1,0 +1,26 @@
+<div class="edit_form_container">
+<div class="note">* indicates required fields</div>
+
+<% form_for [:admin, @page], :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <div class="form_row">
+    <%= f.label :name, '* Name' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form_row">
+    <div class="left"><%= f.label :content %></div>
+    <div class="left"><%= f.text_area :content, :id => 'nicEditor1' %></div>
+    <div class="clear_fix"></div>
+  </div>
+  
+  <div class="form_row"><%= f.submit "Submit" %></div>
+<%- end -%>
+</div>
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+  bkLib.onDomLoaded(function() {
+      new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','link','unlink','image', 'xhtml']}).panelInstance('nicEditor1');
+  });
+</script>

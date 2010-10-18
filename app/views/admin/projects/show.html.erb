@@ -1,0 +1,84 @@
+<% title "Project" %>
+
+<%= render :partial => 'sidebar' %>
+
+<div class="view_container">
+  <div class="view_row">
+    <label>Public</label>
+    <span class="field_content"><%=h @project.published? %></span>
+  </div>
+  <div class="view_row">
+    <label>Categories</label>
+    <span class="field_content">
+      <% for category in @project.categories -%>
+      <div><%=h category.name %></div>
+      <% end -%>
+    </span>
+  </div>
+  <div class="view_row">
+    <label>X5ers</label>
+    <span class="field_content">
+      <% for x5er in @project.x5ers -%>
+      <div><%=h x5er.name %></div>
+      <% end -%>
+    </span>
+  </div>
+  <div class="view_row">
+    <label>Title</label>
+    <span class="field_content"><%=h @project.title %></span>
+  </div>
+  <div class="view_row">
+    <label>Location</label>
+    <span class="field_content"><%=h @project.location %></span>
+  </div>
+  <div class="view_row">
+    <label>Project Date</label>
+    <span class="field_content"><%=h @project.project_date.strftime('%m/%d/%Y') %></span>
+  </div>
+  <div class="view_row">
+    <label>Video Thumbnail</label>
+    <%- if @project.project_image? -%>
+    <span><%= image_tag @project.project_image.url(:thumb) %></span>
+    <%- end -%>
+  </div>
+  <div class="view_row">
+    <label>Video</label>
+    <span class="field_content">
+      <% if @project.video_file_url.blank? %>
+      No Video
+      <% else -%>
+      <%= player({:file => @project.video_file_url, :image => @project.video_file_url }, 
+                 {:width => 300, :height => 200}) %>
+      <% end -%>
+    </span>
+  </div>
+  
+  <div class="view_row">
+    <label class="left">Photos</label>
+    <div class="wide_container left">
+      <%- for photo in @project.photos -%>
+      <%= image_tag photo.data.url(:thumb) %>
+      <%- end -%>
+    </div>
+  </div>
+  
+  <div class="view_row">
+    <label>Sub Text</label>
+    <span class="field_content"><%= @project.sub_text %></span>
+  </div>
+  <div class="view_row">
+    <label>Description</label>
+    <span class="field_content"><%= @project.description %></span>
+  </div>
+  <div class="view_row">
+    <label>Chinese Description</label>
+    <span class="field_content"><%= @project.chinese_description %></span>
+  </div>
+
+</div>
+
+<div class="clear_fix">
+  <%= link_to "Edit", edit_admin_project_path(@project) %> |
+  <%= link_to "Destroy", [:admin, @project], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_projects_path %>
+</div>

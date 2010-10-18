@@ -1,0 +1,26 @@
+<% title "Users" %>
+
+<%- if @users.blank? -%>
+<div class="vmargin_btm_m">Please add a new user</div>
+<%- else -%>
+<table class="view_all">
+  <tr>
+    <th>Login name</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%=h user.login %></td>
+      <td><%=h user.name %></td>
+      <td><%=h user.email %></td>
+      <td class='actions'><%= link_to "View details", [:admin, user] %> | 
+          <%= link_to "Edit", edit_admin_user_path(user) %> |
+          <%= link_to "Delete", [:admin, user], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%- end -%>
+
+<p><%= link_to "Add a new user", new_admin_user_path %></p>

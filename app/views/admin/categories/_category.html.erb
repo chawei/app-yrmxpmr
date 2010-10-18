@@ -1,0 +1,27 @@
+<div class="category_container level_<%= category.ancestors_count %>" id="category_<%= category.id %>">
+  <div class="category">
+    <div class="handle left"><img src="/images/Icon_order.png" alt="[+]"></div>
+    <div class="name left"><%= category.name %></div>
+    <div class="right">
+      <%- category.published ? text = "<span class='public'>Public (Set as Private)</span>" \
+                             : text = "<span class='private'>Private (Set as Public)</span>" -%>
+      <%= link_to_remote text, :url => toggle_published_admin_categories_path(:id => category.id), :update => "cate_status_#{category.id}", :html => { :id => "cate_status_#{category.id}", :class => 'ajax_link' } %>
+      <%= link_to "Preview", category_path(category, :preview => '1'), :target => '_blank' %>
+      <%= link_to "View", [:admin, category] %>
+      <%= link_to "Edit", edit_admin_category_path(category) %>
+      <%= link_to "Delete", [:admin, category], :confirm => 'Are you sure?', 
+                                             :method => :delete %>
+      <%= link_to "Add new subcategory", new_admin_category_path(:parent_id => category.id) %>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  
+  <%- unless category.children.blank? -%>  
+  <div id="cate_<%= category.id %>_level_<%= category.ancestors_count + 1 %>" class="list">
+    <%- for subcategory in category.children -%>
+      <%= render_category_html(subcategory) %>
+    <%- end -%>
+  </div>
+  <%= sortable_element("cate_#{category.id}_level_#{category.ancestors_count + 1}", :url => sort_admin_categories_path) %>
+  <%- end -%>
+</div>

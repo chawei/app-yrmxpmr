@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "feric") %></title>
+    <%= stylesheet_link_tag 'public', :media => 'all' %>
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.address.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
+    <%= javascript_include_tag 'swfobject' %>
+    
+    <!--[if IE 6]>
+  	<link rel="stylesheet" href="/stylesheets/ie6.css" type="text/css" />
+    <![endif]-->
+    
+    <!--[if IE 7]>
+  	<link rel="stylesheet" href="/stylesheets/ie7.css" type="text/css" />
+    <![endif]-->
+    
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container_wrap">
+      <div id="container">
+        <div id="left_column">
+          <div id="logo"><a href="<%= home_url %>"><img src="/images/logo.png" alt="*5"/></a></div>
+          
+          <div id="sidebar">
+            <div class="intro">
+              Hub of  genius,  <br>
+              Bring ideology to reality.
+            </div>
+
+            <div class="contact_items">
+              <div class="contact_item">t+886.2706.6855</div>
+              <div class="contact_item">f+886.2706.6672</div>
+              <div class="contact_item"><%= mail_to "Contact@feric.com" %></div>
+            </div>
+            <div id="search_box">
+              <form action="<%= projects_path %>">
+                <input type="text" name="term" value="<%= params[:term] || "Search" %>" id="search_field" class="idle_field">
+                <input type="submit" name="search_submit" value="" id="search_submit" class="default_btn">
+                <div class='clear_fix'></div>
+              </form>
+            </div>
+            <%= yield(:sidebar) %>
+          </div>
+        </div>
+        <div id="right_column">
+          <div id="main_menu_container">
+            <div id='client_login'>
+              <%- if client_logged_in? -%>
+              <!-- <div class='actions'><%= link_to 'Sign Out', client_logout_url %></div> -->
+              <%- else -%>
+              <!-- <div class='actions'><%= link_to 'Sign In', '#', :id => 'sign_in_link' %></div> -->
+              <div class='login_panel'>
+                <% form_tag session_path do -%>
+                <div class='msg'></div>
+                <div class="form_row">
+                  <div class='label'><%= label_tag 'login', "Username" %></div>
+                  <div class='field'><%= text_field_tag 'login', @login %></div>
+                </div>
+
+                <div class="form_row">
+                  <div class='label'><%= label_tag 'password' %></div>
+                  <div class='field'><%= password_field_tag 'password', nil %></div>
+                </div>
+
+                <!-- Uncomment this if you want this functionality
+                <div class="form_row"><%= label_tag 'remember_me', 'Remember me' %>
+                <%= check_box_tag 'remember_me', '1', @remember_me %></div>
+                -->
+
+                <div class="form_row"><%= submit_tag 'Log in', :class => 'default_btn' %></div>
+                <% end -%>
+              </div>
+              <%- end -%>
+            </div>
+            <div id="main_menu">
+              <%- for category in Category.public_roots -%>
+              <% @category and @category.root == category ? classes = "current" : classes = '' -%>
+              <div class="menu_item"><%= link_to category.name, category_path(category), :class => classes %></div>
+              <%- end -%>
+              <% params[:controller] == "x5ers" ? classes = "current" : classes = '' -%>
+              <!-- <div class="menu_item"><%= link_to "X5ers", x5ers_path, :class => classes %></div> -->
+              <div class="clear_fix"></div>
+            </div>
+          </div>
+          <div id="main_view">
+            <%= yield %>
+          </div>
+        </div>
+        <div class="clear_fix"></div>
+      </div>
+    </div>
+  </body>
+</html>

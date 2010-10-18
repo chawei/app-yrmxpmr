@@ -1,0 +1,34 @@
+<% title "Projects" %>
+
+<%= render :partial => 'sidebar' %>
+
+<% if Project.all.blank? -%>
+<div>Please add a <%= link_to "new project", new_admin_project_path %></div>
+
+<% else -%>
+<div style='margin-bottom: 10px;'><%= link_to "New Project", new_admin_project_path %></div>
+
+<table class="view_all">
+  <tr>
+    <th>Title</th>
+    <th>Location</th>
+  </tr>
+  <% for project in @projects %>
+    <tr id="project_<%= project.id %>">
+      <td><%= truncate project.title, { 40, "..." } %></td>
+      <td><%=h project.location %></td>
+      <td class='actions'>
+        <%- project.published ? text = "<span class='public'>Public (Set as Private)</span>" \
+                              : text = "<span class='private'>Private (Set as Public)</span>" -%>
+        <%= link_to_remote text, :url => toggle_published_admin_projects_path(:id => project.id), :update => "status_#{project.id}", :html => { :id => "status_#{project.id}", :class => 'ajax_link' } %>
+        <%= link_to "View details", [:admin, project] %> |
+        <%= link_to "Edit", edit_admin_project_path(project) %> |
+        <%= link_to "Delete", [:admin, project], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @projects %>
+
+<div><%= link_to "Add a new project", new_admin_project_path %></div>
+<% end -%>

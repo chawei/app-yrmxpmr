@@ -1,0 +1,24 @@
+<% title "X5ers" %>
+
+<%- if @x5ers.blank? -%>
+<div class="vmargin_btm_m">Please add a <%= link_to "new x5er", new_admin_x5er_path %></div>
+<%- else -%>
+<table class="view_all">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% for x5er in @x5ers %>
+    <tr>
+      <td><%=h x5er.name %></td>
+      <td><%=h x5er.email %></td>
+      <td class='actions'><%= link_to "View details", [:admin, x5er] %> | 
+          <%= link_to "Edit", edit_admin_x5er_path(x5er) %> |
+          <%= link_to "Delete", [:admin, x5er], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%- end -%>
+
+<p><%= link_to "Add a new x5er", new_admin_x5er_path %></p>

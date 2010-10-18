@@ -1,0 +1,137 @@
+<%= render :partial => 'sidebar' %>
+
+<div class="edit_form_container">
+<% form_for [:admin, @project], :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <div class="form_row">
+    <%= f.label :published, 'Public' %>
+    <%= f.check_box :published %>
+  </div>
+  <div class="form_row">
+    <label for="categories">Categories</label>
+    <div class="left">
+      <%- for root_category in Category.roots -%>
+      <div class="main_category">
+        <div><%= check_box_tag "project[category_ids][]", "#{root_category.id}",
+                  @project.categories.include?(root_category) %> <%=h root_category.name %></div>
+          <%- for category in root_category.children -%>
+            <span><%= check_box_tag "project[category_ids][]", "#{category.id}",
+                      @project.categories.include?(category) %> <%=h category.name %></span>
+          <%- end -%>
+      </div>
+      <%- end -%>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <label for="x5ers">X5ers</label>
+    <div class="left">
+    <%- for x5er in X5er.all -%>
+    <div><%= check_box_tag "project[x5er_ids][]", "#{x5er.id}",
+              @project.x5ers.include?(x5er) %> <%=h x5er.name %></div>
+    <%- end -%>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <%= f.label :project_date, "Project Date" %>
+    <%= f.date_select :project_date %>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <div class="left">
+      <label for="banner">Video Thumbnail</label>
+      <div class="warning clear_fix">at least 620px width</div>
+    </div>
+    <div class="left">
+      <% if @project.project_image? -%>
+        <div><%= image_tag @project.project_image.url(:thumb) %></div>
+        <div>replace with <%= f.file_field :project_image %></div>
+      <% else -%>
+        <div><%= f.file_field :project_image %></div>
+      <% end -%>
+    </div>
+  </div>
+  <div class="form_row">
+    <%= f.label :video_file_url, "Video File URL" %>
+    <%= f.text_field :video_file_url %>
+    <div class="clear_fix"></div>
+  </div>
+  
+  <div class="form_row">
+    <div class="left">
+      <label for="project_photos">Photos</label>
+      <div class="warning clear_fix">at least 620 x 620 pixels</div>
+    </div>
+    <div class="left">
+        <div id="photos" class="index_view_container">
+          <% for photo in @project.photos %>
+          <div id="photo_<%= photo.id %>" class="index_item clear_fix">
+            <div class="handle left"><img src="/images/Icon_order.png" alt="[+]"></div>
+            <div class="photo_thumb left">
+              <%= image_tag(photo.data(:thumb)) %>
+            </div>
+            <div class="name left"><%=h photo.name %></div>
+            <div class="actions left">
+              <%= link_to_remote "remove", 
+                    :url => delete_photo_admin_projects_path(:id => @project, :photo_id => photo.id), 
+                    :complete => visual_effect(:fade, "photo_#{photo.id}") %>
+            </div>
+            <div class="clear_fix"></div>
+          </div>
+          <%- end -%>
+        </div>
+        <%= sortable_element("photos", :url => sort_admin_photos_path) %>
+      <div id="new_photos">
+         <% if @project.new_record? %>
+           <%= render :partial => 'photo', :locals => { :form => f, :photo => @project.photos.build } %>
+        <% end %>
+      </div>
+
+      <%= add_object_link("+add another photo", f, @project.photos.build, "photo", "#photos") %>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  
+  <div class="form_row">
+    <div class="left">
+      <%= f.label :sub_text, "Sub Text" %>
+      <div class="warning clear_fix"></div>
+    </div>
+    <div class="left">
+      <%= f.text_area :sub_text %>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <div class="left"><%= f.label :description %></div>
+    <div class="left"><%= f.text_area :description, :id => 'nicEditor1' %></div>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row">
+    <div class="left"><%= f.label :chinese_description %></div>
+    <div class="left"><%= f.text_area :chinese_description, :id => 'nicEditor2' %></div>
+    <div class="clear_fix"></div>
+  </div>
+  <div class="form_row"><%= f.submit "Submit" %></div>
+<% end %>
+
+</div>
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+  bkLib.onDomLoaded(function() {
+      new nicEditor({buttonList : ['bold','italic','underline','strikeThrough','link','unlink','xhtml']}).panelInstance('nicEditor1');
+      new nicEditor({buttonList : ['bold','italic','underline','strikeThrough','link','unlink','xhtml']}).panelInstance('nicEditor2');
+  });
+</script>

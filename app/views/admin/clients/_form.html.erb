@@ -1,0 +1,35 @@
+<div class="edit_form_container">
+<% form_for [:admin, @client] do |f| %>
+  <%= f.error_messages %>
+  
+  <div class="form_row">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form_row">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="form_row">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="form_row">
+    <%= f.label :password_confirmation, 'Confirm Password' %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="form_row">
+    <label for="projects">Projects</label>
+    <div class="left">
+    <%- for project in Project.all_private -%>
+    <div><%= check_box_tag "client[project_ids][]", "#{project.id}",
+              @client.projects.include?(project) %> <%=h project.title %></div>
+    <%- end -%>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+  
+  <div class="form_row"><%= f.submit "Submit" %></div>
+<% end %>
+</div>

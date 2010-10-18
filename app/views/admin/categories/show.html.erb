@@ -1,0 +1,23 @@
+<% title "Category" %>
+
+<div class="view_container">  
+  <div class="view_row">
+    <label>Name</label>
+    <span class="field_content"><%=h @category.name %></span>
+  </div>
+  
+  <div class="view_row">
+    <label>Public</label>
+    <span class="field_content"><%=h @category.published? %></span>
+  </div>
+  
+</div>
+
+<div class="view_row clear_fix">
+  <%= link_to "Preview", category_path(@category, :preview => '1'), :target => '_blank' %> |
+  <%= link_to "Edit", edit_admin_category_path(@category) %> |
+  <%= link_to "Delete", [:admin, @category], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_categories_path %> |
+  <%= link_to "New Sub-Category", new_admin_category_path(
+                          :parent_id => @category.id) %>
+</div>
