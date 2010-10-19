@@ -27,14 +27,13 @@
           
           <div id="sidebar">
             <div class="intro">
-              Hub of  genius,  <br>
-              Bring ideology to reality.
+              <%= simple_format @slogan %>
             </div>
 
             <div class="contact_items">
-              <div class="contact_item">t+886.2706.6855</div>
-              <div class="contact_item">f+886.2706.6672</div>
-              <div class="contact_item"><%= mail_to "Contact@tenzones.com" %></div>
+              <div class="contact_item">t+<%=h @tel %></div>
+              <div class="contact_item">f+<%=h @fax %></div>
+              <div class="contact_item"><%= mail_to @email %></div>
             </div>
             <div id="search_box">
               <form action="<%= projects_path %>">

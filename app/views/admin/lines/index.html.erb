@@ -1,0 +1,25 @@
+<% title "Homepage" %>
+
+<% if Line.all.blank? -%>
+<div>Please add a <%= link_to "new line", new_admin_line_path %></div>
+
+<% else -%>
+<table class="view_all">
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% for line in @lines %>
+    <tr id="line_<%= line.id %>">
+      <td><%=h line.name %></td>
+      <td class='actions'>
+        <%= link_to "View details", [:admin, line] %> |
+        <%= link_to "Edit", edit_admin_line_path(line) %> |
+        <%= link_to "Delete", [:admin, line], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>
+  <%= link_to "Add a new line", new_admin_line_path %>
+</p>
+<% end -%>

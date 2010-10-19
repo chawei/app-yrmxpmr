@@ -1,0 +1,27 @@
+<div class="edit_form_container">
+<div class="note">* indicates required fields</div>
+
+<% form_for [:admin, @line] do |f| %>
+  <%= f.error_messages %>
+  <div class="form_row">
+    <%= f.label :name, '* Name' %>
+    <%= f.text_field :name %>
+  </div>
+
+	<%- if @line.data_type == "text" -%>
+  <div class="form_row">
+    <div class="left"><%= f.label :content %></div>
+    <div class="left"><%= f.text_area :content %></div>
+    <div class="clear_fix"></div>
+  </div>
+	<%- else -%>
+	<div class="form_row">
+    <div class="left"><%= f.label :content %></div>
+    <div class="left"><%= f.text_field :content %></div>
+    <div class="clear_fix"></div>
+  </div>
+	<%- end -%>
+  
+  <div class="form_row"><%= f.submit "Submit" %></div>
+<%- end -%>
+</div>

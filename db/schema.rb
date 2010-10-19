@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101018165000) do
+ActiveRecord::Schema.define(:version => 20101019031859) do
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(:version => 20101018165000) do
   create_table "clients_projects", :id => false, :force => true do |t|
     t.integer "client_id"
     t.integer "project_id"
+  end
+
+  create_table "lines", :force => true do |t|
+    t.string   "unique_name"
+    t.string   "name"
+    t.string   "data_type"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pages", :force => true do |t|

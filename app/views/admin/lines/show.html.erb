@@ -1,0 +1,20 @@
+<% title "Homepage" %>
+
+<div class="view_container">  
+  <div class="view_row">
+    <label>Name</label>
+    <span class="field_content"><%=h @line.name %></span>
+  </div>
+  
+  <div class="view_row">
+    <label>Content</label>
+    <span class="field_content"><%= @line.content %></span>
+  </div>
+  
+</div>
+
+<div class="view_row clear_fix">
+  <%= link_to "Edit", edit_admin_line_path(@line) %> |
+  <%= link_to "Delete", [:admin, @line], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_lines_path %>
+</div>

@@ -50,6 +50,7 @@ ActionController::Routing::Routes.draw do |map|
                                                 :delete_photo => :delete }
     admin.resources :photos, :collection => { :sort => :post, :delete_photo => :delete }
     admin.resources :pages
+    admin.resources :lines
     admin.resources :users
     admin.resources :x5ers
     admin.resources :clients
