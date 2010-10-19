@@ -18,7 +18,7 @@ a {
   text-decoration:none;
 }
 a:hover {
-  color: #ac7a2a;
+  color: #ff381d;
 }
 
 /* Structure
@@ -68,7 +68,7 @@ a:hover {
 }
 
 #sidebar .intro {
-  color: #ac7a2a;
+  color: #ff381d;
   font-size: 16px;
   line-height: 22px;
   width: 180px;
@@ -97,7 +97,7 @@ a:hover {
     border: none;
   }
   #sidebar .sub_category a.current {
-    color: #ac7a2a;
+    color: #ff381d;
   }
   #sidebar .sub_category .projects {
     margin: 0;
@@ -124,10 +124,10 @@ a:hover {
     border: none;
   }
   #main_menu a:hover {
-    color: #ac7a2a;
+    color: #ff381d;
   }
   #main_menu a.current {
-    color: #ac7a2a;
+    color: #ff381d;
   }
   
   #main_menu .menu_item {
@@ -199,7 +199,7 @@ a:hover {
     
   }
   .project_header .title {
-    color: #ac7a2a;
+    color: #ff381d;
     display: block;
     float: left;
     font-size: 20px;
@@ -316,7 +316,7 @@ input#search_field:hover {
     margin: 0 0 0 10px;
   }
   .pagination .current {
-    color: #ac7a2a;
+    color: #ff381d;
   }
 /* Misc 
 --------------- */ 
@@ -326,7 +326,7 @@ input#search_field:hover {
 
 .notice {
   font-size: 20px;
-  color: #ac7a2a;
+  color: #ff381d;
 }
 
 .left {
