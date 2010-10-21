@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
                       :secret_access_key => S3[:secret]
                     },
                     :bucket => S3[:bucket],
-                    :path => "/:style/:filename"
+                    :path => "/project_image/:id/:style/:filename"
                     
   validates_attachment_size :project_image, :less_than => 1.megabytes, 
                                             :if => Proc.new { |imports| !imports.project_image_file_name.blank? }

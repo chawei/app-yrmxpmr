@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
                              :secret_access_key => S3[:secret]
                            },
                            :bucket => S3[:bucket],
-                           :path => "/:style/:filename"
+                           :path => "/photo/:id/:style/:filename"
                                              
   validates_attachment_presence :data
   validates_attachment_size :data, :less_than => 2.megabytes
