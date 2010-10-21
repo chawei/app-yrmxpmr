@@ -12,7 +12,14 @@ class Project < ActiveRecord::Base
   
   has_attached_file :project_image, 
                     :styles => { :thumb => "60x60>",
-                                 :display => "620x400" }
+                                 :display => "620x400" },
+                    :storage => :s3, 
+                    :s3_credentials => {
+                      :access_key_id => S3[:key],
+                      :secret_access_key => S3[:secret]
+                    },
+                    :bucket => S3[:bucket],
+                    :path => "/:style/:filename"
                     
   validates_attachment_size :project_image, :less_than => 1.megabytes
   validates_as_image        :project_image

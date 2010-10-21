@@ -1,4 +1,5 @@
 config/database.yml.mt
+config/s3.yml
 .DS_Store
 .DS_config
 db/*.sqlite3
