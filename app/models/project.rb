@@ -21,7 +21,8 @@ class Project < ActiveRecord::Base
                     :bucket => S3[:bucket],
                     :path => "/:style/:filename"
                     
-  validates_attachment_size :project_image, :less_than => 1.megabytes
+  validates_attachment_size :project_image, :less_than => 1.megabytes, 
+                                            :if => Proc.new { |imports| !imports.project_image_file_name.blank? }
   validates_as_image        :project_image
   
   before_destroy :remove_related_items
