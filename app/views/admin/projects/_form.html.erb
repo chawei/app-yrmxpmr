@@ -24,16 +24,6 @@
     <div class="clear_fix"></div>
   </div>
   <div class="form_row">
-    <label for="x5ers">X5ers</label>
-    <div class="left">
-    <%- for x5er in X5er.all -%>
-    <div><%= check_box_tag "project[x5er_ids][]", "#{x5er.id}",
-              @project.x5ers.include?(x5er) %> <%=h x5er.name %></div>
-    <%- end -%>
-    </div>
-    <div class="clear_fix"></div>
-  </div>
-  <div class="form_row">
     <%= f.label :title %>
     <%= f.text_field :title %>
     <div class="clear_fix"></div>

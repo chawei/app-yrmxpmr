@@ -1,6 +1,6 @@
 class Admin::CategoriesController < ApplicationController
   layout 'admin'
-  before_filter :login_required
+  before_filter :login_required, :check_access
     
   def index
     @categories = Category.all
@@ -76,5 +76,14 @@ class Admin::CategoriesController < ApplicationController
       text = "Category Not Exist"
     end
     render :text => text
+  end
+  
+  private
+  
+  def check_access
+    unless current_user.admin?
+      flash[:notice] = "You don't have the access to this page."
+      redirect_to admin_projects_path 
+    end
   end
 end

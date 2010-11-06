@@ -1,6 +1,6 @@
 class Admin::LinesController < ApplicationController
   layout 'admin'
-  before_filter :login_required
+  before_filter :login_required, :check_access
   
   def index
     @lines = Line.custom
@@ -43,6 +43,15 @@ class Admin::LinesController < ApplicationController
     @line.destroy
     flash[:notice] = "Successfully destroyed line."
     redirect_to admin_lines_url
+  end
+  
+  private
+  
+  def check_access
+    unless current_user.admin?
+      flash[:notice] = "You don't have the access to this page."
+      redirect_to admin_projects_path 
+    end
   end
   
 end

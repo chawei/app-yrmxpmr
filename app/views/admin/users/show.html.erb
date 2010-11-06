@@ -3,6 +3,10 @@
 <div class="view_container">
   
   <div class="view_row">
+    <label>Admin</label>
+    <span><%=h @user.admin? ? "Yes" : "No" %></span>
+  </div>
+  <div class="view_row">
     <label>Login</label>
     <span><%=h @user.login %></span>
   </div>
@@ -17,7 +21,7 @@
 
   <div class="view_row">
     <%= link_to "Edit", edit_admin_user_path(@user) %> |
-    <%= link_to "Destroy", [:admin, @user], :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to "Delete", [:admin, @user], :confirm => 'Are you sure?', :method => :delete %> |
     <%= link_to "View All", admin_users_path %>
   </div>
 

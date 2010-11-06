@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101019031859) do
+ActiveRecord::Schema.define(:version => 20101106160844) do
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -89,7 +89,12 @@ ActiveRecord::Schema.define(:version => 20101019031859) do
     t.datetime "project_image_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "project_date",               :default => '2010-10-14'
+    t.date     "project_date",               :default => '2010-11-06'
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "projects_x5ers", :id => false, :force => true do |t|
@@ -107,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20101019031859) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
+    t.boolean  "admin"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

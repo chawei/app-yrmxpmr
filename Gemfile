@@ -19,4 +19,9 @@ group :test do
   # bundler requires these gems while running tests
   # gem "rspec"
   # gem "faker"
+  gem "cucumber"
+  gem "webrat"
+  gem "thoughtbot-factory_girl"
+  gem "rspec"
+  gem "rspec-rails"
 end

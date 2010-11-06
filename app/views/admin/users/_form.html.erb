@@ -3,12 +3,30 @@
   <%= f.error_messages %>
   
   <div class="form_row">
+    <%= f.label :admin %>
+    <%= f.check_box :admin %>
+  </div>
+  <div class="form_row">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="form_row">
     <%= f.label :email %>
     <%= f.text_field :email %>
+  </div>
+  <div class="form_row">
+    <label for="projects">Projects</label>
+    <div class="left">
+      <%- for project in Project.all -%>
+      <div class="main_category">
+        <div>
+          <%= check_box_tag "user[project_ids][]", "#{project.id}",
+                            @user.projects.include?(project) %> <%=h project.title %>
+        </div>
+      </div>
+      <%- end -%>
+    </div>
+    <div class="clear_fix"></div>
   </div>
   <div class="form_row">
     <%= f.label :password %>

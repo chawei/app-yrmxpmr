@@ -3,11 +3,19 @@ class Admin::ProjectsController < ApplicationController
   before_filter :login_required
   
   def index
-    @projects = Project.paginate :page => params[:page], :per_page => 10
+    if current_user.admin?
+      @projects = Project.paginate :page => params[:page], :per_page => 10
+    else
+      @projects = current_user.projects.paginate :page => params[:page], :per_page => 10
+    end
   end
   
   def show
     @project = Project.find(params[:id])
+    unless current_user.admin? or current_user.projects.include?(@project)
+      flash[:notice] = "You don't have the access to this project."
+      redirect_to :action => "index"
+    end
   end
   
   def new
@@ -17,6 +25,7 @@ class Admin::ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
+      @project.users << current_user
       flash[:notice] = "Successfully created project."
       redirect_to [:admin, @project]
     else

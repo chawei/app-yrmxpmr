@@ -2,12 +2,10 @@
 
 <%= render :partial => 'sidebar' %>
 
-<% if Project.all.blank? -%>
+<% if @projects.blank? -%>
 <div>Please add a <%= link_to "new project", new_admin_project_path %></div>
 
 <% else -%>
-<div style='margin-bottom: 10px;'><%= link_to "New Project", new_admin_project_path %></div>
-
 <table class="view_all">
   <tr>
     <th>Title</th>

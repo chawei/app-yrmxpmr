@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/admin/register', :controller => 'admin/users', :action => 'create'
   map.signup '/admin/signup', :controller => 'admin/users', :action => 'new'
   
-  map.admin_home '/admin', :controller => 'admin/users', :action => 'index'
+  map.admin_home '/admin', :controller => 'admin/projects', :action => 'index'
   
   map.namespace :admin do |admin|
     admin.resources :categories, :collection => { :sort => :post, :toggle_published => :post }

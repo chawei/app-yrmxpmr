@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   layout 'admin'
-  before_filter :login_required
+  before_filter :login_required, :check_access
   
   # Be sure to include AuthenticationSystem in Application Controller instead
   # include AuthenticatedSystem
@@ -55,5 +55,14 @@ class Admin::UsersController < ApplicationController
     @user.destroy
     flash[:notice] = "Successfully destroyed user."
     redirect_to admin_users_url
+  end
+  
+  private
+  
+  def check_access
+    unless current_user.admin?
+      flash[:notice] = "You don't have the access to this page."
+      redirect_to admin_projects_path 
+    end
   end
 end

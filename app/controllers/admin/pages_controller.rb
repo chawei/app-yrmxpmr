@@ -1,6 +1,6 @@
 class Admin::PagesController < ApplicationController
   layout 'admin'
-  before_filter :login_required
+  before_filter :login_required, :check_access
   
   def index
     @pages = Page.custom
@@ -45,4 +45,12 @@ class Admin::PagesController < ApplicationController
     redirect_to admin_pages_url
   end
   
+  private
+  
+  def check_access
+    unless current_user.admin?
+      flash[:notice] = "You don't have the access to this page."
+      redirect_to admin_projects_path 
+    end
+  end
 end
