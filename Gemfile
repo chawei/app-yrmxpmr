@@ -21,7 +21,7 @@ group :test do
   # gem "faker"
   gem "cucumber"
   gem "webrat"
-  gem "thoughtbot-factory_girl"
+  gem "factory_girl"
   gem "rspec"
   gem "rspec-rails"
 end
