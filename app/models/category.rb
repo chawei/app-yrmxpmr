@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :projects
   before_destroy :remove_related_items
   
-  named_scope :public_roots, :conditions => {:published => true, :ancestors_count => 0}
+  named_scope :public_roots, :conditions => {:published => true, :ancestors_count => 0}, :order => "position ASC"
   
   def public_children
     children.find_all {|c| c.published == true}
