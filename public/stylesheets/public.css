@@ -344,3 +344,7 @@ input#search_field:hover {
 .hide {
   display: none;
 }
+
+.frontpage_content {
+  margin: 0 0 20px 0;
+}

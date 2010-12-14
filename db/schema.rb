@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101106160844) do
+ActiveRecord::Schema.define(:version => 20101214182912) do
 
   create_table "categories", :force => true do |t|
     t.integer "parent_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20101106160844) do
     t.boolean "published"
     t.integer "position"
     t.integer "hidden"
+    t.text    "frontpage"
   end
 
   create_table "categories_projects", :id => false, :force => true do |t|
@@ -89,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20101106160844) do
     t.datetime "project_image_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "project_date",               :default => '2010-11-06'
+    t.date     "project_date",               :default => '2010-10-14'
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
